@@ -1,0 +1,47 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 1.2rem;
+    }
+}
+
+#loader {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.spinner-border {
+    width: 4rem;
+    height: 4rem;
+    border-width: 0.4em;
+    color: #0ff;
+}
+
+/* Add previous styles, ensure no conflicts */
+.game-container, .control-panel { background-color: #1a1a1a; }
+#pong-canvas { width: 100%; height: 100%; object-fit: contain; }
+.tilt-visualizer, .text-center { text-shadow: 0 0 5px #0ff; }
+.tilt-arrow-container { border: 2px solid #0ff; box-shadow: 0 0 10px #0ff; }
+.modal-content { background-color: #1a1a1a; color: #fff; border: 1px solid #0ff; box-shadow: 0 0 20px #0ff; }
+.form-select, .form-range { background-color: #333; color: #fff; border-color: #0ff; }
+.form-range::-webkit-slider-thumb { background: #0ff; }
+.form-range::-moz-range-thumb { background: #0ff; }
+.progress { background-color: #333; border: 1px solid #0ff; }
+.progress-bar { background-color: #0ff; }
+.btn-secondary { background-color: #333; border-color: #0ff; }
+
