@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="loader" class="d-flex justify-content-center align-items-center vh-100 position-absolute w-100 h-100" style="background-color: rgba(0,0,0,0.8); z-index: 1060;">
@@ -68,12 +71,9 @@
     <div class="modal fade" id="calibration-modal" data-bs-backdrop="static" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Calibration</h5></div><div class="modal-body"><p>Look directly at the camera to set the center point. Then, tilt your head left and right to see the paddle move.</p><div class="progress mt-3"><div id="calibration-progress" class="progress-bar" role="progressbar" style="width: 0%;"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Done</button></div></div></div></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="js/camera.js"></script>
-    <script src="js/face-tracking.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/pong.js"></script>    
+    <script src="js/main.js" defer></script>
+    <script src="js/camera.js" defer></script>
+    <script src="js/face-tracking.js" defer></script>
+    <script src="js/pong.js" defer></script>    
 </body>
 </html>

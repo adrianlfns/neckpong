@@ -1,20 +1,27 @@
 const canvas = document.getElementById('pong-canvas');
 const ctx = canvas.getContext('2d');
 
-// --- Modals & UI Elements ---
-const gameOverModal = new bootstrap.Modal(document.getElementById('game-over-modal'));
-const settingsModal = new bootstrap.Modal(document.getElementById('settings-modal'));
-const calibrationModal = new bootstrap.Modal(document.getElementById('calibration-modal'));
-const finalScoreText = document.getElementById('final-score-text');
-const bestScoreElement = document.getElementById('best-score');
+// --- Game Modals & UI Elements (from shared app object) ---
+const { gameOverModal, settingsModal, calibrationModal, finalScoreText, bestScoreElement } = {
+    gameOverModal: new bootstrap.Modal(document.getElementById('game-over-modal')),
+    settingsModal: new bootstrap.Modal(document.getElementById('settings-modal')),
+    calibrationModal: new bootstrap.Modal(document.getElementById('calibration-modal')),
+    finalScoreText: document.getElementById('final-score-text'),
+    bestScoreElement: document.getElementById('best-score')
+};
 
-// --- Buttons ---
-const restartGameBtn = document.getElementById('restart-game-btn');
-const pauseResumeBtn = document.getElementById('pause-resume-btn');
-const startCalibrationBtn = document.getElementById('start-calibration-btn');
+// --- Buttons (from shared app object) ---
+const { startGameBtn, restartGameBtn, pauseResumeBtn, startCalibrationBtn } = {
+    startGameBtn: window.app.dom.startGameBtn,
+    restartGameBtn: document.getElementById('restart-game-btn'),
+    pauseResumeBtn: document.getElementById('pause-resume-btn'),
+    startCalibrationBtn: document.getElementById('start-calibration-btn')
+};
 
-// --- Settings ---
-const difficultySelect = document.getElementById('difficulty-select');
+// --- Settings (from shared app object) ---
+const { difficultySelect } = {
+    difficultySelect: document.getElementById('difficulty-select')
+};
 
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
@@ -32,7 +39,6 @@ let computer = { x: canvas.width / 2 - PADDLE_WIDTH / 2, y: 10, width: PADDLE_WI
 let ball = { x: canvas.width / 2, y: canvas.height / 2, radius: BALL_RADIUS, speedX: 5, speedY: 5 };
 
 // --- Game State & Settings ---
-window.gameState = 'start'; // 'start', 'running', 'paused', 'gameOver', 'calibrating'
 let bestScore = localStorage.getItem('pongBestScore') || 0;
 bestScoreElement.textContent = bestScore;
 
@@ -78,16 +84,16 @@ function collision(b, p) {
 }
 
 function update() {
-    if (window.gameState === 'calibrating') {
-        player.x += window.gameControl.paddleVelocity * PADDLE_SPEED;
+    if (window.app.state.gameState === 'calibrating') {
+        player.x += window.app.gameControl.paddleVelocity * PADDLE_SPEED;
         if (player.x < 0) player.x = 0;
         if (player.x > canvas.width - player.width) player.x = canvas.width - player.width;
         return;
     }
 
-    if (window.gameState !== 'running') return;
+    if (window.app.state.gameState !== 'running') return;
 
-    player.x += window.gameControl.paddleVelocity * PADDLE_SPEED;
+    player.x += window.app.gameControl.paddleVelocity * PADDLE_SPEED;
     if (player.x < 0) player.x = 0;
     if (player.x > canvas.width - player.width) player.x = canvas.width - player.width;
 
@@ -130,13 +136,13 @@ function render() {
 }
 
 function gameLoop() {
-    if (window.gameState === 'running' || window.gameState === 'calibrating') {
+    if (window.app.state.gameState === 'running' || window.app.state.gameState === 'calibrating') {
         update();
     }
     render();
 
     if (player.score >= WINNING_SCORE || computer.score >= WINNING_SCORE) {
-        window.gameState = 'gameOver';
+        window.app.state.gameState = 'gameOver';
         const newScore = player.score;
         if (newScore > bestScore) {
             bestScore = newScore;
@@ -151,14 +157,14 @@ function gameLoop() {
 }
 
 // --- Event Listeners ---
-startGameBtn.addEventListener('click', () => { window.gameState = 'running'; startModal.hide(); });
-restartGameBtn.addEventListener('click', () => { resetGame(); window.gameState = 'running'; gameOverModal.hide(); });
+startGameBtn.addEventListener('click', () => { window.app.state.gameState = 'running'; window.app.dom.startModal.hide(); });
+restartGameBtn.addEventListener('click', () => { resetGame(); window.app.state.gameState = 'running'; gameOverModal.hide(); });
 pauseResumeBtn.addEventListener('click', () => {
-    if (window.gameState === 'running') { window.gameState = 'paused'; pauseResumeBtn.textContent = 'Resume'; }
-    else if (window.gameState === 'paused') { window.gameState = 'running'; pauseResumeBtn.textContent = 'Pause'; }
+    if (window.app.state.gameState === 'running') { window.app.state.gameState = 'paused'; pauseResumeBtn.textContent = 'Resume'; }
+    else if (window.app.state.gameState === 'paused') { window.app.state.gameState = 'running'; pauseResumeBtn.textContent = 'Pause'; }
 });
 startCalibrationBtn.addEventListener('click', () => {
-    window.gameState = 'calibrating';
+    window.app.state.gameState = 'calibrating';
     settingsModal.hide();
     calibrationModal.show();
     
@@ -171,7 +177,7 @@ startCalibrationBtn.addEventListener('click', () => {
             clearInterval(interval);
             setTimeout(() => {
                 calibrationModal.hide();
-                window.gameState = 'paused';
+                window.app.state.gameState = 'paused';
                 settingsModal.show();
                 calProgress.style.width = `0%`;
             }, 500);
@@ -182,7 +188,7 @@ startCalibrationBtn.addEventListener('click', () => {
 difficultySelect.addEventListener('change', applyDifficulty);
 
 window.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && (window.gameState === 'running' || window.gameState === 'paused')) pauseResumeBtn.click();
+    if (e.code === 'Space' && (window.app.state.gameState === 'running' || window.app.state.gameState === 'paused')) pauseResumeBtn.click();
 });
 
 // Initial setup
