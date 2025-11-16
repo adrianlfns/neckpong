@@ -4,7 +4,7 @@
 
 // --- Module-level State ---
 let _videoElement = null;
-const smoothingBufferSize = 10;
+const smoothingBufferSize = 4;
 const angleBuffer = [];
 const deadZone = 3;
 const maxTilt = 30;
