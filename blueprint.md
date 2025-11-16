@@ -16,34 +16,14 @@ This project is a single-player Pong game controlled by head tilts, detected via
 *   **Modern Aesthetics:** The game has a gaming-inspired design with neon colors, animations, and clear typography.
 *   **Face Mesh Rendering:** The webcam feed is hidden, and only the 3D face mesh is rendered for a "holographic" effect.
 
-## Current Plan: Final Polish
+## Current Plan: Improve Mobile Responsiveness
 
-**Objective:** Add a final layer of polish to the user experience with sound effects, visual feedback, improved UI animations, loading states, and more detailed instructions.
+**Objective:** Adjust the layout and styling to ensure the game is more usable and visually appealing on mobile devices. Specifically, the camera/face mesh view should not be excessively large on smaller screens.
 
 **Steps:**
 
-1.  **Update `index.html`:**
-    *   Add `<audio>` elements for sound effects (ball bounce, score).
-    *   Introduce a new modal for detailed game instructions.
-    *   Add a loading spinner element to be displayed while the camera initializes.
-    *   Overlay a new canvas (`effects-canvas`) on top of the game canvas for particle effects.
-    *   Add a button to open the new instructions modal.
-
-2.  **Update `style.css`:**
-    *   Style the loading spinner and position it centrally.
-    *   Add smooth, fading transitions for all modals.
-    *   Implement responsive font sizes using `clamp()` or media queries to ensure readability on all screen sizes.
-    *   Increase the size of buttons and interactive elements on smaller screens to be more touch-friendly.
-
-3.  **Create `effects.js`:**
-    *   Create a new file to manage sound and visual effects to keep the code organized.
-    *   Implement a function to play sounds for ball bounces and scoring.
-    *   Create a simple particle system. When a point is scored, generate a burst of particles from the ball's position for visual feedback.
-
-4.  **Update `pong.js`:**
-    *   Integrate the new `effects.js` module.
-    *   Call the sound and particle effect functions at the appropriate times (e.g., during a collision or when a score is updated).
-
-5.  **Update `main.js`:**
-    *   Display the loading spinner when `setupCamera()` is called and hide it once the camera is successfully connected or fails.
-    *   Add an event listener to the new "Instructions" button to open the instructions modal.
+1.  **Update `style.css`:**
+    *   Add a media query to target mobile screen sizes (e.g., `max-width: 767px`).
+    *   Within the media query, reduce the size of the head-tracking camera view. Instead of taking up the full width, it will be constrained to a smaller, more appropriate size.
+    *   Center the camera view within the control panel on mobile screens.
+    *   Adjust the overall layout of the control panel on mobile to ensure all elements are easily accessible and well-proportioned.
