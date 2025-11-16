@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#1a1a2e" stroke="#00ff88" stroke-width="3"/>
+  
+  <!-- Tilted head silhouette -->
+  <g transform="translate(100, 80) rotate(-15)">
+    <!-- Head -->
+    <ellipse cx="0" cy="0" rx="28" ry="35" fill="#00d4ff"/>
+    <!-- Neck -->
+    <rect x="-8" y="30" width="16" height="20" fill="#00d4ff" rx="3"/>
+    <!-- Eyes -->
+    <circle cx="-10" cy="-5" r="3" fill="#1a1a2e"/>
+    <circle cx="10" cy="-5" r="3" fill="#1a1a2e"/>
+    <!-- Smile -->
+    <path d="M -8 8 Q 0 12 8 8" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Pong paddle (left) -->
+  <rect x="25" y="120" width="8" height="40" fill="#ff00ff" rx="2">
+    <animate attributeName="y" values="120;110;120" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Pong paddle (right) -->
+  <rect x="167" y="130" width="8" height="40" fill="#ff00ff" rx="2">
+    <animate attributeName="y" values="130;140;130" dur="1.5s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Pong ball -->
+  <circle cx="100" cy="140" r="5" fill="#00ff88">
+    <animate attributeName="cx" values="100;140;100;60;100" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="140;130;140;150;140" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Motion lines indicating head tilt -->
+  <path d="M 70 65 Q 65 70 65 78" stroke="#00ff88" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 75 60 Q 70 63 68 70" stroke="#00ff88" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4">
+    <animate attributeName="opacity" values="0.4;0.1;0.4" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+  </path>
+  
+  <!-- Text -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#00ff88" text-anchor="middle">
+    NeckPong
+  </text>
+</svg>
