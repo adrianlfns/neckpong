@@ -72,6 +72,12 @@ This project is built with modern, framework-less web technologies, leveraging t
         // ... apply tilt to paddle ...
     }
      ```
+## Media Pipe Face, Landmarks used.
+
+Two landmarks in the face were used to compute the tilt of the head. The landmarks are 234 in the left cheek and 454 on the right cheek. With those two points a line can be formed and an angle can be computed. See image below for reference.
+
+![Head-Controlled Pong Gameplay](/images/mediapipe_face_landmark_fullsizeLandmarks.png)
+
 
 ## Project Structure
 
