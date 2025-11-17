@@ -89,3 +89,6 @@ The project is organized into the following files and directories:
 ## Getting Started
 
 To run the game locally, simply open the `index.html` file in your web browser. Make sure you have a stable internet connection, as the game relies on CDN-hosted libraries.
+
+## Demo URL
+https://adrianlfns.github.io/neckpong/
